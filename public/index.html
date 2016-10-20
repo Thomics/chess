@@ -1,0 +1,23 @@
+<html>
+<head>
+  <title>Chess</title>
+  <link rel="stylesheet" href="style/main.css" type="text/css">
+</head>
+<body ng-app="chess">
+
+  <section class="chessboard-container" ng-controller="ChessController as chessCtrl">
+    <div class="chess-space" ng-repeat="space in chessCtrl.chessboard">
+      {{space.row}}
+      {{space.column}}
+    </div>
+  </section>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
+
+  <script src="app/app.js"></script>
+  <script src="app/chess.controller.js"></script>
+
+
+</body>
+</html>

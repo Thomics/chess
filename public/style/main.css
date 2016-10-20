@@ -1,0 +1,28 @@
+body {
+  background: #312e2b;
+}
+
+.chessboard-container {
+  width: 75vh;
+  height: 75vh;
+  margin: 0 auto;
+}
+
+.chess-space {
+  width: calc(12% - 2px);
+  height: calc(12% - 2px);
+  float: left;
+  border: 1px solid #312e2b;
+  background: #eeeed2;
+}
+
+.chess-space:nth-child(-2n+8),
+.chess-space:nth-child(8) ~ .chess-space:nth-child(-2n+15),
+.chess-space:nth-child(16) ~ .chess-space:nth-child(-2n+24),
+.chess-space:nth-child(24) ~ .chess-space:nth-child(-2n+31),
+.chess-space:nth-child(32) ~ .chess-space:nth-child(-2n+40),
+.chess-space:nth-child(40) ~ .chess-space:nth-child(-2n+47),
+.chess-space:nth-child(48) ~ .chess-space:nth-child(-2n+56),
+.chess-space:nth-child(56) ~ .chess-space:nth-child(-2n+63) {
+  background-color: #769656;
+}
