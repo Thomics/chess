@@ -1,14 +1,16 @@
 <html>
 <head>
   <title>Chess</title>
+  <link rel="stylesheet" href="style/reset.css" type="text/css">
   <link rel="stylesheet" href="style/main.css" type="text/css">
 </head>
 <body ng-app="chess">
 
   <section class="chessboard-container" ng-controller="ChessController as chessCtrl">
     <div class="chess-space" ng-repeat="space in chessCtrl.chessboard">
-      {{space.row}}
-      {{space.column}}
+      <!--{{space.row}}-->
+      <!--{{space.column}}-->
+      <p>{{space.piece.letter}}</p>
     </div>
   </section>
 

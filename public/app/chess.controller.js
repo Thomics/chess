@@ -60,27 +60,48 @@
 
 
     function setPieces(i, letter) {
-      var color = 'white';
-      if ( i >= 7 ) {
-        color = 'black';
-      }
+      var color = (i >= 7) ? 'black' : 'white';
+      var pieceLetter;
 
       if ( i === 2 || i === 7 ) {
-        return new vm.Square(i, letter, true, {piece: 'pawn', color: color});
+        pieceLetter = (color === 'white') ? 'p' : 'o'; //Pawn White p, Black o
+        var piece = new Pawn(color, pieceLetter);
+        return new vm.Square(i, letter, true, piece);
+        //return new vm.Square(i, letter, true, { piece: 'pawn', color: color, pieceLetter: pieceLetter, touched: false });
+
       } else if ( letter === 'A' || letter === 'H' ) {
-        return new vm.Square(i, letter, true, {piece: 'rook', color: color});
+        pieceLetter = (color === 'white') ? 'r' : 't'; //Rook White r, Black t
+        return new vm.Square(i, letter, true, {piece: 'rook', color: color, pieceLetter: pieceLetter});
+
       } else if ( letter === 'B' || letter === 'G') {
-        return new vm.Square(i, letter, true, {piece: 'knight', color: color});
+        pieceLetter = (color === 'white') ? 'h' : 'j'; //Knight White h, Black j
+        return new vm.Square(i, letter, true, {piece: 'knight', color: color, pieceLetter: pieceLetter});
+
       } else if ( letter === 'C' || letter === 'F') {
-        return new vm.Square(i, letter, true, {piece: 'bishop', color: color});
+        pieceLetter = (color === 'white') ? 'b' : 'n'; //Bishop White b, Black n
+        return new vm.Square(i, letter, true, {piece: 'bishop', color: color, pieceLetter: pieceLetter});
+
       } else if ( letter === 'D') {
-        return new vm.Square(i, letter, true, {piece: 'queen', color: color});
+        pieceLetter = (color === 'white') ? 'q' : 'w'; //Queen White q, Black w
+        return new vm.Square(i, letter, true, {piece: 'queen', color: color, pieceLetter: pieceLetter});
+
       } else {
-        return new vm.Square(i, letter, true, {piece: 'king', color: color});
+        pieceLetter = (color === 'white') ? 'k' : 'l'; //King White k, Black l
+        return new vm.Square(i, letter, true, {piece: 'king', color: color, pieceLetter: pieceLetter});
       }
+
     }
 
 
+    function Pawn(color, letter) {
+
+      this.piece = 'pawn';
+      this.color = color;
+      this.letter = letter;
+      this.moved = false;
+      this.move = this.column++;
+
+    }
 
 
 
