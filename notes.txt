@@ -1,2 +1,0 @@
-I could create a map of the key/values and the square they map to.
-I could add a variable for the square number.
