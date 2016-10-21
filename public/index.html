@@ -7,15 +7,16 @@
 <body ng-app="chess">
 
   <section class="chessboard-container" ng-controller="ChessController as chessCtrl">
-    <div class="chess-space" ng-repeat="space in chessCtrl.chessboard">
-      <!--{{space.row}}-->
-      <!--{{space.column}}-->
-      <p>{{space.piece.letter}}</p>
+    <div class='row' ng-repeat="space in chessCtrl.chessboard">
+      <div class="chess-space" ng-repeat="square in space">
+        <p ng-model="space.piece.column" ng-click="square.piece.move()">{{square.piece.letter}}</p>
+      </div>
     </div>
   </section>
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
+  <!--<script src="angular.js"></script>-->
 
   <script src="app/app.js"></script>
   <script src="app/chess.controller.js"></script>
