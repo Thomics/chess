@@ -1,0 +1,10 @@
+<section class="chessboard-container" ng-controller="ChessController as chessCtrl">
+  <div class='row' ng-repeat="space in chessCtrl.chessboard">
+    <div class="chess-space" ng-repeat="square in space">
+      <p ng-model="square.piece.pieceLetter" ng-click="square.piece.move()">
+        {{square.piece.pieceLetter}}
+      </p>
+      <!--square.piece.letter-->
+    </div>
+  </div>
+</section>

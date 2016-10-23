@@ -9,23 +9,20 @@
   <section class="chessboard-container" ng-controller="ChessController as chessCtrl">
     <div class='row' ng-repeat="space in chessCtrl.chessboard">
       <div class="chess-space" ng-repeat="square in space">
-        <p ng-model="space.piece.column" ng-click="square.piece.move()">
+        <p class="chess-piece" ng-model="square.piece.pieceLetter" ng-click="square.piece.move()" draggable="true" id="piece-{{square.squareNum}}">
           {{square.piece.pieceLetter}}
-          <!--<br />col{{square.column}}-->
-          <!--<br />{{square.piece.color}}-->
-          <!--<br />{{square.piece.piece}}-->
         </p>
-        <!--square.piece.letter-->
       </div>
     </div>
   </section>
 
 
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
-  <!--<script src="angular.js"></script>-->
+  <!--<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>-->
+  <script src="angular.js"></script>
 
   <script src="app/app.js"></script>
   <script src="app/chess.controller.js"></script>
+  <script src="app/cSquare.js"></script>
 
 
 </body>
