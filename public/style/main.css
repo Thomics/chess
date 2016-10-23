@@ -14,13 +14,13 @@ body {
 }
 
 
-.chessboard-container {
+#chessboard-container {
   font-family: 'Chess Alpha';
   width: 75vh;
   height: 75vh;
   margin: 12.5vh auto 0 auto;
+  background: #eeeed2;
 }
-
 
 .chess-space {
   width: 9.375vh;
@@ -38,25 +38,13 @@ body {
   cursor: pointer;
 }
 
-
-.row:nth-child(2n+2) .chess-space:nth-child(1),
-.row:nth-child(2n+1) .chess-space:nth-child(2),
-.row:nth-child(2n+2) .chess-space:nth-child(3),
-.row:nth-child(2n+1) .chess-space:nth-child(4),
-.row:nth-child(2n+2) .chess-space:nth-child(5),
-.row:nth-child(2n+1) .chess-space:nth-child(6),
-.row:nth-child(2n+2) .chess-space:nth-child(7),
-.row:nth-child(2n+1) .chess-space:nth-child(8){
+#chessboard-container div:nth-child(-2n+8),
+#chessboard-container div:nth-child(8) ~ div:nth-child(-2n+15),
+#chessboard-container div:nth-child(16) ~ div:nth-child(-2n+24),
+#chessboard-container div:nth-child(24) ~ div:nth-child(-2n+31),
+#chessboard-container div:nth-child(32) ~ div:nth-child(-2n+40),
+#chessboard-container div:nth-child(40) ~ div:nth-child(-2n+47),
+#chessboard-container div:nth-child(48) ~ div:nth-child(-2n+56),
+#chessboard-container div:nth-child(56) ~ div:nth-child(-2n+63) {
   background-color: #769656;
-}
-
-.row:nth-child(2n+1) .chess-space:nth-child(1),
-.row:nth-child(2n+2) .chess-space:nth-child(2),
-.row:nth-child(2n+1) .chess-space:nth-child(3),
-.row:nth-child(2n+2) .chess-space:nth-child(4),
-.row:nth-child(2n+1) .chess-space:nth-child(5),
-.row:nth-child(2n+2) .chess-space:nth-child(6),
-.row:nth-child(2n+1) .chess-space:nth-child(7),
-.row:nth-child(2n+2) .chess-space:nth-child(8){
-  background-color: #eeeed2;
 }
