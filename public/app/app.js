@@ -114,41 +114,27 @@ function drag(ev) {
 
 
 function drop(ev) {
-  console.log(ev.path);
 
   ev.preventDefault();
-  //var piece = Number(ev.dataTransfer.getData("text"));
   var piece = ev.dataTransfer.getData("text");
 
-  console.log(piece);
+  var targetSquare = ev.target.classList.length === 0 ? ev.target.parentElement : ev.target;
+  var newSquare = targetSquare.classList[1] || '';
 
-  ev.target.innerHTML = '';
-  ev.target.appendChild(document.getElementById(piece));
-  console.log(ev.target.outerHTML);
+  targetSquare.innerHTML = '';
 
+  targetSquare.appendChild(document.getElementById(piece));
 
-  //var targetPiece = Number(ev.target.outerHTML.split('id="')[1].split('\"')[0]);
-  //var targetSquare = Number(ev.target.classList[1]);
-  //var turget = ev.target.classList[1];
-  //
-  //console.log(targetSquare);
-  //console.log(turget);
-  //
-  //console.log(document.getElementsByClassName(targetSquare)[0]);
-  //
-  //document.getElementsByClassName(targetSquare)[0].innerHTML = '';
-  //
-  //document.getElementsByClassName(targetSquare)[0].appendChild(document.getElementById(piece));
-  //
-  //console.log(document.getElementById(piece));
-  //console.log(document.getElementsByClassName(targetSquare)[0]);
-
-  //movePiece(targetSquare, piece);
+  movePiece(newSquare, piece);
 
 }
 
 
 function movePiece(newSquare, oldSquare ) {
+
+  console.log(newSquare);
+  console.log(oldSquare);
+
 
   vm.chessboard[newSquare].occupied = true;
   vm.chessboard[newSquare].piece = vm.chessboard[oldSquare].piece;
