@@ -36,6 +36,7 @@ function Pawn(id, color, letter) {
   this.color = color;
   this.pieceLetter = letter;
   this.previousSquares = [id];
+  this.lastSquare = id;
   this.moved = false;
 
 }
@@ -122,11 +123,18 @@ function drop(ev) {
   //The ID of the moved piece
   var piece = ev.dataTransfer.getData("text");
 
+  //Gets the square that the element came from.
+  var previousSquare = vm.chessboard[Number(piece)];
+  console.log(previousSquare);
+
+
   //Get the target square whether the user takes another piece or places it in an empty square.
   var targetSquare = ev.target.classList.length === 0 ? ev.target.parentElement : ev.target;
 
   //The class/id of the target square.
   var newSquare = targetSquare.classList[1] || '';
+
+  //console.log(targetSquare);
 
 
   targetSquare.innerHTML = '';
@@ -134,41 +142,52 @@ function drop(ev) {
   //Adds the piece to the target square.
   targetSquare.appendChild(document.getElementById(piece));
 
-  movePiece(newSquare, piece);
+  movePiece(Number(newSquare), Number(piece), previousSquare);
+
+  ev.dataTransfer.clearData();
 
 }
 
-
-function movePiece(newSquare, pieceId ) {
+//newSquare - the id/class of the new square.
+//pieceID - the id of the piece that was moved.
+function movePiece(newSquare, pieceId, previousSquare) {
 
   console.log(newSquare);
   console.log(pieceId);
-
-  var pieceObj = vm.chessboard[pieceId];
-  console.log(pieceId);
-
-  //var prevSquareLength = vm.chessboard[Number(oldSquare)].piece.previousSquares.length;
-  //var prevSquare = vm.chessboard[Number(oldSquare)].piece.previousSquares[prevSquareLength - 1];
-  //console.log(prevSquare);
+  console.log(previousSquare);
 
 
-  //console.log(vm.chessboard[newSquare]);
-  //vm.chessboard[Number(oldSquare)].piece.previousSquares.push(oldSquare.squareNum);
-  //console.log(vm.chessboard[Number(oldSquare)]);
+  var squareId = vm.chessboard[newSquare].lastSquare;
 
 
+  //The square object that holds the square info and the piece object.
+  var pieceObj = vm.chessboard[pieceId].piece;
+  //console.log(pieceObj);
 
 
-  //vm.chessboard[newSquare].occupied = true;
-  //vm.chessboard[newSquare].piece = vm.chessboard[oldSquare].piece;
-  //vm.chessboard[newSquare].piece.moved = true;
-  //
-  //vm.chessboard[oldSquare].occupied = false;
-  //vm.chessboard[oldSquare].piece = {piece: '', color: '', pieceLetter: ''};
-  //
-  //vm.chessboard[Number(newSquare)].piece.previousSquares.push(newSquare);
-  //
-  //var prevSquare = vm.chessboard[Number(newSquare)].piece.previousSquares.pop();
+  //Gets the value of the pieces most recent square location.
+  var oldSquare = pieceObj.lastSquare;
+
+  //Sets the value of the pieces most recent square to the current square.
+  pieceObj.lastSquare = newSquare;
+
+  //Adds the previous square to the list of squares the piece has been on.
+  pieceObj.previousSquares.push(newSquare);
+  console.log(pieceObj.previousSquares.length);
+
+
+  pieceObj.moved = true;
+
+  //Sets the new square to occupied, the old square to not occupied.
+  vm.chessboard[newSquare].occupied = true;
+  vm.chessboard[oldSquare].occupied = false;
+
+  //Moves the piece from one square to another (objects).
+  vm.chessboard[newSquare].piece = pieceObj;
+  vm.chessboard[oldSquare].piece = {piece: '', color: '', pieceLetter: ''};
+  console.log(vm.chessboard[newSquare]);
+  console.log(vm.chessboard[oldSquare]);
+
 
 }
 
