@@ -1,26 +1,9 @@
-make is so when you place the piece back down it doesn't delete itself
+Pawn Moves:
+- Moves forward one square - unless, it's the first move (Then one or two).
+- Can take a piece diagonally (assuming that moving doesn't put their king in check)
+- If the pawn is on a square and another pawn moves two squares right next to it, it can take the other pawn
+via en passant (only directly after the pawn is moved).
+- Pawns can only move forward
+- When a pawn reaches the opposite side of the board, it can turn in to a (Knight, Bishop, Rook, Queen)
 
-
-
-function createBoard() {
-  var chessSquare;
-  var chessRow = [];
-  var squareNum = 0;
-  var text = '';
-
-  for ( var i = 0; i <= 7; i++ ) {
-    for ( var j = 0; j <= 7; j++ ) {
-      if ( i <= 1 || i >= 6 ) {
-        chessSquare = setPieces(i, j, squareNum);
-      } else {
-        chessSquare = new vm.Square(i, j, squareNum, false, {row: i, column: i, pieceLetter: ''});
-      }
-      chessRow.push(chessSquare);
-      text += vm.generateHtml(chessSquare);
-      squareNum++;
-    }
-    vm.chessboard.push(chessRow);
-    chessRow = [];
-  }
-  document.getElementById('chessboard-container').innerHTML = text;
-}
+If a pawn is on a square, make a list of available moves.

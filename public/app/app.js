@@ -31,17 +31,20 @@ function Square( squareNum, occupied, piece) {
 }
 
 
-function Pawn(id, color, letter) {
-
+function Piece(id, color, piece, letter, moveList) {
   this.id = id;
-  this.piece = 'pawn';
+  this.piece = piece;
   this.color = color;
   this.pieceLetter = letter;
   this.previousSquares = [id];
+  this.currentSquare = id;
   this.moved = false;
-
+  this.moveList = {
+    moveForward: function(currentSquare) {
+      
+    }
+  };
 }
-
 
 
 function createBoard() {
@@ -62,7 +65,8 @@ function createBoard() {
 
 
 
-function setPieces(i, j, squareNum) {
+
+function setPieces(i) {
 
   if ( i <= 15 ) { var color = 'black'; }
   if ( i >= 48 ) { var color = 'white'; }
@@ -71,25 +75,25 @@ function setPieces(i, j, squareNum) {
   var piece = {};
   if ( (i >= 8 && i <= 15) || (i >= 48 && i <= 55) ) {
     pieceLetter = (color === 'white') ? 'p' : 'o'; //Pawn White p, Black o
-    piece = new Pawn(i, color, pieceLetter);
+    piece = new Piece(i, color, 'pawn', pieceLetter, []);
   } else if ( i === 0 || i === 7 || i === 56 || i === 63 ) {
     pieceLetter = (color === 'white') ? 'r' : 't'; //Rook White r, Black t
-    piece = {piece: 'rook', color: color, pieceLetter: pieceLetter};
+    piece = new Piece(i, color, 'rook', pieceLetter, []);
   } else if ( i === 1 || i === 6 || i === 57 || i === 62 ) {
     pieceLetter = (color === 'white') ? 'h' : 'j'; //Knight White h, Black j
-    piece = {piece: 'knight', color: color, pieceLetter: pieceLetter};
+    piece = new Piece(i, color, 'knight', pieceLetter, []);
   } else if ( i === 2 || i === 5 || i === 58 || i === 61 ) {
     pieceLetter = (color === 'white') ? 'b' : 'n'; //Bishop White b, Black n
-    piece = {piece: 'bishop', color: color, pieceLetter: pieceLetter};
+    piece = new Piece(i, color, 'bishop', pieceLetter, []);
   } else if ( i === 3 || i === 59 ) {
     pieceLetter = (color === 'white') ? 'q' : 'w'; //Queen White q, Black w
-    piece = {piece: 'queen', color: color, pieceLetter: pieceLetter}
+    piece = new Piece(i, color, 'queen', pieceLetter, []);
   } else if (i === 4 || i == 60) {
     pieceLetter = (color === 'white') ? 'k' : 'l'; //King White k, Black l
-    piece = {piece: 'king', color: color, pieceLetter: pieceLetter}
+    piece = new Piece(i, color, 'king', pieceLetter, []);
   } else {
     piece = {piece: '', color: '', pieceLetter: ''};
-    return new vm.Square(i, false, piece);
+    return new vm.Square(i, false, piece, []);
   }
 
   vm.pieceList[i] = piece;
@@ -102,6 +106,7 @@ function allowDrop(ev) {
   ev.preventDefault();
 }
 
+
 function drag(ev) {
   var lastSquare = ev.path[1].classList[1];
 
@@ -109,7 +114,6 @@ function drag(ev) {
   ev.dataTransfer.setData('previousSquare', lastSquare);
   ev.target.style.opacity = ".99";
 }
-
 
 
 function drop(ev) {
@@ -124,35 +128,64 @@ function drop(ev) {
 
   //Get the target square whether the user takes another piece or places it in an empty square.
   var targetSquare = ev.target.classList.length === 0 ? ev.target.parentElement : ev.target;
-
   //The class/id of the target square.
   var newSquare = Number(targetSquare.classList[1]) || -1;
 
 
-  //Adds the piece to the target square.
-  targetSquare.appendChild(document.getElementById(pieceId));
+  if ( checkLegalMove(newSquare, previousSquare, pieceId) ) {
 
-  vm.movePiece(newSquare, previousSquare, pieceId);
+    targetSquare.innerHTML = '';
 
-  ev.dataTransfer.clearData();
+    //Adds the piece to the target square.
+    targetSquare.appendChild(document.getElementById(pieceId));
+
+    vm.movePiece(newSquare, previousSquare, pieceId);
+
+    ev.dataTransfer.clearData();
+
+  }
 
 }
+
+
+function checkLegalMove(newSquare, previousSquare, pieceId) {
+
+  var pieceObj = vm.pieceList[pieceId];
+  var newSquareObj = vm.chessboard[newSquare];
+
+  console.log(newSquare + " new Square");
+  console.log(previousSquare + " previous Square");
+  console.log(pieceId + " piece id");
+
+  //Checks if the pieces are the same color.
+  if ( newSquareObj.piece.color === pieceObj.color ) {
+    return false;
+  }
+
+  //Checks if the player places the piece back where it was.
+  if ( previousSquare === newSquare ) {
+    return false;
+  }
+
+  return true;
+}
+
 
 //newSquare - the id/class of the new square.
 //previousSquare - the previous squares number.
 //pieceID - the id of the piece that was moved.
 function movePiece(newSquare, previousSquare, pieceId) {
 
-  console.log(newSquare + ' new sq');
-  console.log(pieceId + ' piece id');
-  console.log(previousSquare + ' previous sq');
+  //console.log(newSquare + ' new sq');
+  //console.log(pieceId + ' piece id');
+  //console.log(previousSquare + ' previous sq');
 
-  var pieceObj = vm.pieceList[pieceId]
+  var pieceObj = vm.pieceList[pieceId];
 
   //Adds the square the piece moved from to the list of previous squares.
   pieceObj.previousSquares.push(newSquare);
   pieceObj.moved = true;
-
+  pieceObj.currentSquare = newSquare;
   console.log(pieceObj);
 
 
@@ -163,6 +196,8 @@ function movePiece(newSquare, previousSquare, pieceId) {
   //Moves the piece from one square to another (objects).
   vm.chessboard[newSquare].piece = pieceObj;
   vm.chessboard[previousSquare].piece = {piece: '', color: '', pieceLetter: ''};
+
+
 
 
 }
