@@ -32,7 +32,6 @@ function Square( squareNum, occupied, piece) {
 
 
 function Piece(id, color, piece, letter) {
-  var outerThis = this;
   this.id = id;
   this.piece = piece;
   this.color = color;
@@ -40,48 +39,6 @@ function Piece(id, color, piece, letter) {
   this.previousSquares = [id];
   this.currentSquare = id;
   this.moved = false;
-  this.createMoves = function(currentSquare) {
-
-    var legalMoves = [];
-
-    //Next Square ahead.
-    var square = (outerThis.color === 'white') ? (currentSquare - 8) : (currentSquare + 8);
-    if ( !square.occupied ) {
-      legalMoves.push(square);
-    }
-
-    //Checks if the piece is able ¬to move two steps forward.
-    if (!outerThis.moved) {
-      square = (outerThis.color === 'white') ? (currentSquare - 16) : (currentSquare + 16);
-      if ( !square.occupied ) {
-        legalMoves.push(square);
-      }
-    }
-
-    //Check opponent pieces to the upper right/left.
-    square = (outerThis.color === 'white') ? (currentSquare - 7) : (currentSquare + 7);
-    square = vm.chessboard[square];
-
-
-    if ( square.occupied && (vm.chessboard[currentSquare].piece.color != square.piece.color)) {
-      //check for king check
-      console.log(square.squareNum);
-
-      legalMoves.push(square.squareNum);
-    }
-    square = (outerThis.color === 'white') ? (currentSquare - 9) : (currentSquare + 9);
-    square = vm.chessboard[square];
-    if ( square.occupied && (vm.chessboard[currentSquare].piece.color != square.piece.color)) {
-      //check for king check
-      console.log(square.squareNum);
-
-      legalMoves.push(square.squareNum);
-    }
-    console.log(legalMoves);
-
-    return legalMoves;
-    //Code En Passant
-  };
 }
 
 
@@ -110,7 +67,7 @@ function setPieces(i) {
   var piece = {};
   if ( (i >= 8 && i <= 15) || (i >= 48 && i <= 55) ) {
     pieceLetter = (color === 'white') ? 'p' : 'o'; //Pawn White p, Black o
-    piece = new Piece(i, color, 'pawn', pieceLetter, []);
+    piece = new Pawn(i, color, 'pawn', pieceLetter, []);
   } else if ( i === 0 || i === 7 || i === 56 || i === 63 ) {
     pieceLetter = (color === 'white') ? 'r' : 't'; //Rook White r, Black t
     piece = new Piece(i, color, 'rook', pieceLetter, []);
@@ -190,7 +147,6 @@ function drop(ev) {
 
 
 }
-
 
 function checkLegalMove(newSquare, previousSquare, pieceId) {
 
