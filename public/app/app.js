@@ -40,29 +40,48 @@ function Piece(id, color, piece, letter) {
   this.previousSquares = [id];
   this.currentSquare = id;
   this.moved = false;
-  this.moveList = {
-    moveForward: function(currentSquare) {
-      //kingCheck();
+  this.createMoves = function(currentSquare) {
 
-      //Next Square ahead.
-      var square = (outerThis.color === 'white') ? (currentSquare - 8) : (currentSquare + 8);
+    var legalMoves = [];
 
-
-      console.log(vm.chessboard[square].piece.piece === '');
-      if ( vm.chessboard[square].piece.piece === '' ) {
-        outerThis.legalMoves.push(square);
-      }
-
-      console.log(outerThis.legalMoves);
-
-      return vm.chessboard[square].piece.piece === '';
+    //Next Square ahead.
+    var square = (outerThis.color === 'white') ? (currentSquare - 8) : (currentSquare + 8);
+    if ( !square.occupied ) {
+      legalMoves.push(square);
     }
+
+    //Checks if the piece is able ¬to move two steps forward.
+    if (!outerThis.moved) {
+      square = (outerThis.color === 'white') ? (currentSquare - 16) : (currentSquare + 16);
+      if ( !square.occupied ) {
+        legalMoves.push(square);
+      }
+    }
+
+    //Check opponent pieces to the upper right/left.
+    square = (outerThis.color === 'white') ? (currentSquare - 7) : (currentSquare + 7);
+    square = vm.chessboard[square];
+
+
+    if ( square.occupied && (vm.chessboard[currentSquare].piece.color != square.piece.color)) {
+      //check for king check
+      console.log(square.squareNum);
+
+      legalMoves.push(square.squareNum);
+    }
+    square = (outerThis.color === 'white') ? (currentSquare - 9) : (currentSquare + 9);
+    square = vm.chessboard[square];
+    if ( square.occupied && (vm.chessboard[currentSquare].piece.color != square.piece.color)) {
+      //check for king check
+      console.log(square.squareNum);
+
+      legalMoves.push(square.squareNum);
+    }
+    console.log(legalMoves);
+
+    return legalMoves;
+    //Code En Passant
   };
-
-  this.legalMoves = [
-    40
-  ]
-
 }
 
 
@@ -151,7 +170,12 @@ function drop(ev) {
   var pieceObj = vm.pieceList[pieceId];
 
 
-  if ( checkLegalMove(newSquare, previousSquare, pieceId) && pieceObj.legalMoves.indexOf(newSquare) >= 0 ) {
+  var legalMoves = pieceObj.createMoves(previousSquare);
+  console.log(newSquare + " new square");
+
+  console.log(legalMoves);
+
+  if ( legalMoves.indexOf(newSquare) >= 0 ) {
 
     targetSquare.innerHTML = '';
 
@@ -163,6 +187,7 @@ function drop(ev) {
     ev.dataTransfer.clearData();
 
   }
+
 
 }
 
@@ -195,19 +220,12 @@ function checkLegalMove(newSquare, previousSquare, pieceId) {
 //pieceID - the id of the piece that was moved.
 function movePiece(newSquare, previousSquare, pieceId) {
 
-  //console.log(newSquare + ' new sq');
-  //console.log(pieceId + ' piece id');
-  //console.log(previousSquare + ' previous sq');
-
   var pieceObj = vm.pieceList[pieceId];
 
   //Adds the square the piece moved from to the list of previous squares.
   pieceObj.previousSquares.push(newSquare);
   pieceObj.moved = true;
   pieceObj.currentSquare = newSquare;
-  console.log(pieceObj);
-  pieceObj.moveList.moveForward(newSquare);
-
 
   //Sets the new square to occupied, the old square to not occupied.
   vm.chessboard[newSquare].occupied = true;
