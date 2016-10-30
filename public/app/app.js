@@ -84,7 +84,7 @@ function setPieces(i) {
     pieceLetter = (color === 'white') ? 'k' : 'l'; //King White k, Black l
     piece = new Piece(i, color, 'king', pieceLetter, []);
   } else {
-    piece = {piece: '', color: '', pieceLetter: ''};
+    piece = {piece: '', color: '', pieceLetter: '', previousSquares: []};
     return new vm.Square(i, false, piece, []);
   }
 
@@ -128,9 +128,9 @@ function drop(ev) {
 
 
   var legalMoves = pieceObj.createMoves(previousSquare);
-  console.log(newSquare + " new square");
+  //console.log(newSquare + " new square");
 
-  console.log(legalMoves);
+  //console.log(legalMoves);
 
   if ( legalMoves.indexOf(newSquare) >= 0 ) {
 
@@ -146,28 +146,6 @@ function drop(ev) {
   }
 
 
-}
-
-function checkLegalMove(newSquare, previousSquare, pieceId) {
-
-  var pieceObj = vm.pieceList[pieceId];
-  var newSquareObj = vm.chessboard[newSquare];
-
-  console.log(newSquare + " new Square");
-  console.log(previousSquare + " previous Square");
-  console.log(pieceId + " piece id");
-
-  //Checks if the pieces are the same color.
-  if ( newSquareObj.piece.color === pieceObj.color ) {
-    return false;
-  }
-
-  //Checks if the player places the piece back where it was.
-  if ( previousSquare === newSquare ) {
-    return false;
-  }
-
-  return true;
 }
 
 

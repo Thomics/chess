@@ -36,20 +36,42 @@ Pawn.prototype.createMoves = function(currentSquare) {
     }
   }
 
+  //Check En Passant
+  var rightPassant = checkEnPassant(vm.chessboard[currentSquare+1], currentSquare, 7, this.color);
+  if (rightPassant) { console.log('right'); legalMoves.push(rightPassant); }
+
+  var leftPassant = checkEnPassant(vm.chessboard[currentSquare-1], currentSquare, 9, this.color);
+  if (leftPassant) { console.log('left'); legalMoves.push(leftPassant); }
+
+
+  //Program in the taking of the below piece, removing it from the board.
+
+
   //Check opponent pieces to the upper right/left.
   square = (this.color === 'white') ? (currentSquare - 7) : (currentSquare + 7);
-  square = vm.chessboard[square];
-  if ( square.occupied && (vm.chessboard[currentSquare].piece.color != square.piece.color)) {
-    legalMoves.push(square.squareNum);
+  squareObj = vm.chessboard[square];
+  if (squareObj.occupied && (vm.chessboard[currentSquare].piece.color != squareObj.piece.color)) {
+    legalMoves.push(squareObj.squareNum);
   }
 
   square = (this.color === 'white') ? (currentSquare - 9) : (currentSquare + 9);
-  square = vm.chessboard[square];
-  if ( square.occupied && (vm.chessboard[currentSquare].piece.color != square.piece.color)) {
-    legalMoves.push(square.squareNum);
+  squareObj = vm.chessboard[square];
+  if (squareObj.occupied && (vm.chessboard[currentSquare].piece.color != squareObj.piece.color)) {
+    legalMoves.push(squareObj.squareNum);
   }
 
   return legalMoves;
 
-  //Code En Passant / 8th Row
+  //Code 8th Row
 };
+
+//Checks for En Passant move availability.
+function checkEnPassant(squareObj, currentSquare, offset, color) {
+
+  if ( squareObj.piece.piece === 'pawn' && squareObj.piece.previousSquares.length === 2 ) {
+    return (color === 'white') ? (currentSquare - offset) : (currentSquare + offset);
+  }
+  return false;
+
+}
+
