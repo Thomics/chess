@@ -67,10 +67,10 @@ function setPieces(i) {
   var piece = {};
   if ( (i >= 8 && i <= 15) || (i >= 48 && i <= 55) ) {
     pieceLetter = (color === 'white') ? 'p' : 'o'; //Pawn White p, Black o
-    piece = new Pawn(i, color, 'pawn', pieceLetter, []);
+    piece = new Pawn(i, color, 'pawn', pieceLetter);
   } else if ( i === 0 || i === 7 || i === 56 || i === 63 ) {
     pieceLetter = (color === 'white') ? 'r' : 't'; //Rook White r, Black t
-    piece = new Piece(i, color, 'rook', pieceLetter, []);
+    piece = new Rook(i, color, 'rook', pieceLetter);
   } else if ( i === 1 || i === 6 || i === 57 || i === 62 ) {
     pieceLetter = (color === 'white') ? 'h' : 'j'; //Knight White h, Black j
     piece = new Piece(i, color, 'knight', pieceLetter, []);
@@ -128,9 +128,7 @@ function drop(ev) {
 
 
   var legalMoves = pieceObj.createMoves(previousSquare);
-  //console.log(newSquare + " new square");
 
-  //console.log(legalMoves);
 
   if ( legalMoves.indexOf(newSquare) >= 0 ) {
 
@@ -155,6 +153,8 @@ function drop(ev) {
 function movePiece(newSquare, previousSquare, pieceId) {
 
   var pieceObj = vm.pieceList[pieceId];
+  console.log(pieceObj);
+
 
   //Adds the square the piece moved from to the list of previous squares.
   pieceObj.previousSquares.push(newSquare);
@@ -168,6 +168,7 @@ function movePiece(newSquare, previousSquare, pieceId) {
   //Moves the piece from one square to another (objects).
   vm.chessboard[newSquare].piece = pieceObj;
   vm.chessboard[previousSquare].piece = {piece: '', color: '', pieceLetter: ''};
+  vm.chessboard[previousSquare].occupied = false;
 
 
 
