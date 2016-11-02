@@ -39,7 +39,7 @@ Pawn.prototype.createMoves = function(currentSquare) {
 
   //Check En Passant
   var rightPassant = checkEnPassant(vm.chessboard[currentSquare+1], currentSquare, 7, this.color);
-  if (rightPassant) { console.log('right'); legalMoves.push(rightPassant); }
+  if (rightPassant) { legalMoves.push(rightPassant); }
   var leftPassant = checkEnPassant(vm.chessboard[currentSquare-1], currentSquare, 9, this.color);
   if (leftPassant) { legalMoves.push(leftPassant); }
 
@@ -48,8 +48,7 @@ Pawn.prototype.createMoves = function(currentSquare) {
   var rightCheck = checkPawnTake(currentSquare, 7, this.color);
   if (rightCheck) { legalMoves.push(rightCheck); }
   var leftCheck = checkPawnTake(currentSquare, 9, this.color);
-  if (leftCheck) { legalMoves.push(leftCheck); }
-
+  if (leftCheck >= 0 && leftCheck !== false) { legalMoves.push(leftCheck); }
 
   return legalMoves;
 
@@ -64,18 +63,17 @@ Pawn.prototype.createMoves = function(currentSquare) {
 function checkEnPassant(squareObj, currentSquare, offset, color) {
 
   if ( squareObj.piece.piece === 'pawn' && squareObj.piece.previousSquares.length === 2 ) {
-    console.log(color === 'white');
-    console.log(currentSquare);
-
     return (color === 'white') ? (currentSquare - offset) : (currentSquare + offset);
   }
   return false;
 
 }
 
+//If the space is occupied by an enemy piece we return that square.
 function checkPawnTake(currentSquare, offset, color) {
 
   var squareObj = (color === 'white') ? vm.chessboard[currentSquare - offset] : vm.chessboard[currentSquare + offset];
+
   if (squareObj.occupied && (vm.chessboard[currentSquare].piece.color != squareObj.piece.color)) {
     return squareObj.squareNum;
   }

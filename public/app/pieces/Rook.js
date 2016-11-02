@@ -25,14 +25,13 @@ function checkRookVertical(currentSquare, offset, color) {
 
   while ( true ) {
     var squareObj = (color === 'white') ? vm.chessboard[currentSquare - offset] : vm.chessboard[currentSquare + offset];
-    console.log(squareObj);
 
     if (!squareObj.occupied) {
       availableMoves.push(squareObj.squareNum);
     } else if (squareObj.piece.color !== color && squareObj.occupied) {
       availableMoves.push(squareObj.squareNum);
-    } else {
-      console.log('break');
+      break;
+    } else if (squareObj.piece.color === color && squareObj.occupied) {
       break;
     }
 
@@ -41,3 +40,4 @@ function checkRookVertical(currentSquare, offset, color) {
 
   return availableMoves;
 }
+

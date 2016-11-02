@@ -109,7 +109,6 @@ function drag(ev) {
 
 
 function drop(ev) {
-  //console.log(ev);
 
   ev.preventDefault();
 
@@ -121,24 +120,19 @@ function drop(ev) {
   //Get the target square whether the user takes another piece or places it in an empty square.
   var targetSquare = ev.target.classList.length === 0 ? ev.target.parentElement : ev.target;
   //The class/id of the target square.
-  var newSquare = Number(targetSquare.classList[1]) || -1;
+  var newSquare = Number(targetSquare.classList[1]) >= 0 ? Number(targetSquare.classList[1]) : -1;
 
   //Current Chess Piece
   var pieceObj = vm.pieceList[pieceId];
 
-
   var legalMoves = pieceObj.createMoves(previousSquare);
-
 
   if ( legalMoves.indexOf(newSquare) >= 0 ) {
 
     targetSquare.innerHTML = '';
-
     //Adds the piece to the target square.
     targetSquare.appendChild(document.getElementById(pieceId));
-
     vm.movePiece(newSquare, previousSquare, pieceId);
-
     ev.dataTransfer.clearData();
 
   }
@@ -153,8 +147,6 @@ function drop(ev) {
 function movePiece(newSquare, previousSquare, pieceId) {
 
   var pieceObj = vm.pieceList[pieceId];
-  console.log(pieceObj);
-
 
   //Adds the square the piece moved from to the list of previous squares.
   pieceObj.previousSquares.push(newSquare);
@@ -169,9 +161,6 @@ function movePiece(newSquare, previousSquare, pieceId) {
   vm.chessboard[newSquare].piece = pieceObj;
   vm.chessboard[previousSquare].piece = {piece: '', color: '', pieceLetter: ''};
   vm.chessboard[previousSquare].occupied = false;
-
-
-
 
 }
 
