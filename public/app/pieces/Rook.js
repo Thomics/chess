@@ -12,21 +12,33 @@ function Rook(id, color, piece, letter) {
 
 Rook.prototype.createMoves = function(currentSquare) {
   var legalMoves = [];
-  var verticalMoves = checkRookVertical(currentSquare, 8, this.color);
 
+  //Creates rooks vertical movement list.
+  var verticalMoves = checkRookMoves(currentSquare, 8, this.color, 'forward');
+  legalMoves = verticalMoves.concat(legalMoves);
+  verticalMoves = checkRookMoves(currentSquare, 8, this.color, 'backwards');
+  legalMoves = verticalMoves.concat(legalMoves);
+
+  //Creates rooks vertical movement list
+  verticalMoves = checkRookMoves(currentSquare, 1, this.color, 'forward');
+  legalMoves = verticalMoves.concat(legalMoves);
+  verticalMoves = checkRookMoves(currentSquare, 1, this.color, 'backwards');
   legalMoves = verticalMoves.concat(legalMoves);
 
   return legalMoves;
 };
 
 
-function checkRookVertical(currentSquare, offset, color) {
+function checkRookMoves(currentSquare, offset, color, direction) {
   var availableMoves = [];
+  var count = offset;
 
   while ( true ) {
-    var squareObj = (color === 'white') ? vm.chessboard[currentSquare - offset] : vm.chessboard[currentSquare + offset];
+    var squareObj = (direction === 'forward') ? vm.chessboard[currentSquare - offset] : vm.chessboard[currentSquare + offset];
 
-    if (!squareObj.occupied) {
+    if ( squareObj === undefined ) {
+      break;
+    } else if (!squareObj.occupied) {
       availableMoves.push(squareObj.squareNum);
     } else if (squareObj.piece.color !== color && squareObj.occupied) {
       availableMoves.push(squareObj.squareNum);
@@ -34,10 +46,10 @@ function checkRookVertical(currentSquare, offset, color) {
     } else if (squareObj.piece.color === color && squareObj.occupied) {
       break;
     }
+    console.log(offset + currentSquare);
 
-    offset += 8;
+    offset += count;
   }
 
   return availableMoves;
 }
-
