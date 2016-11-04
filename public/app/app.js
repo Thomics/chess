@@ -76,7 +76,7 @@ function setPieces(i) {
     piece = new Piece(i, color, 'knight', pieceLetter, []);
   } else if ( i === 2 || i === 5 || i === 58 || i === 61 ) {
     pieceLetter = (color === 'white') ? 'b' : 'n'; //Bishop White b, Black n
-    piece = new Piece(i, color, 'bishop', pieceLetter, []);
+    piece = new Bishop(i, color, 'bishop', pieceLetter);
   } else if ( i === 3 || i === 59 ) {
     pieceLetter = (color === 'white') ? 'q' : 'w'; //Queen White q, Black w
     piece = new Piece(i, color, 'queen', pieceLetter, []);
