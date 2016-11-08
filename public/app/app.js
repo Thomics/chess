@@ -73,16 +73,16 @@ function setPieces(i) {
     piece = new Rook(i, color, 'rook', pieceLetter);
   } else if ( i === 1 || i === 6 || i === 57 || i === 62 ) {
     pieceLetter = (color === 'white') ? 'h' : 'j'; //Knight White h, Black j
-    piece = new Piece(i, color, 'knight', pieceLetter, []);
+    piece = new Knight(i, color, 'knight', pieceLetter, []);
   } else if ( i === 2 || i === 5 || i === 58 || i === 61 ) {
     pieceLetter = (color === 'white') ? 'b' : 'n'; //Bishop White b, Black n
     piece = new Bishop(i, color, 'bishop', pieceLetter);
   } else if ( i === 3 || i === 59 ) {
     pieceLetter = (color === 'white') ? 'q' : 'w'; //Queen White q, Black w
-    piece = new Piece(i, color, 'queen', pieceLetter, []);
+    piece = new Queen(i, color, 'queen', pieceLetter);
   } else if (i === 4 || i == 60) {
     pieceLetter = (color === 'white') ? 'k' : 'l'; //King White k, Black l
-    piece = new Piece(i, color, 'king', pieceLetter, []);
+    piece = new King(i, color, 'king', pieceLetter);
   } else {
     piece = {piece: '', color: '', pieceLetter: '', previousSquares: []};
     return new vm.Square(i, false, piece, []);

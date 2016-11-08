@@ -19,7 +19,7 @@ Rook.prototype.createMoves = function(currentSquare) {
   verticalMoves = checkVerticalRook(currentSquare, this.color, 'backwards');
   legalMoves = verticalMoves.concat(legalMoves);
 
-  //Creates rooks vertical movement list
+  //Creates rooks horizontal movement list
   verticalMoves = checkHorizontalRook(currentSquare, 1, this.color, 'forward');
   legalMoves = verticalMoves.concat(legalMoves);
   verticalMoves = checkHorizontalRook(currentSquare, 1, this.color, 'backwards');

@@ -7,3 +7,6 @@ via en passant (only directly after the pawn is moved).
 - When a pawn reaches the opposite side of the board, it can turn in to a (Knight, Bishop, Rook, Queen)
 
 If a pawn is on a square, make a list of available moves.
+
+
+Revisit Rook having check horizontal/vertical and combine if possible.
