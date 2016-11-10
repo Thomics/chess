@@ -153,6 +153,13 @@ function movePiece(newSquare, previousSquare, pieceId) {
   pieceObj.moved = true;
   pieceObj.currentSquare = newSquare;
 
+  if (newSquare <= 7 && pieceObj.piece === 'pawn') {
+    vm.pieceList[pieceId] = new Queen(newSquare, pieceObj.color, 'queen', 'q');
+    pieceObj = vm.pieceList[pieceId];
+    console.log('in');
+
+  }
+
   //Sets the new square to occupied, the old square to not occupied.
   vm.chessboard[newSquare].occupied = true;
   vm.chessboard[previousSquare].occupied = false;
@@ -161,6 +168,9 @@ function movePiece(newSquare, previousSquare, pieceId) {
   vm.chessboard[newSquare].piece = pieceObj;
   vm.chessboard[previousSquare].piece = {piece: '', color: '', pieceLetter: ''};
   vm.chessboard[previousSquare].occupied = false;
+
+
+
 
 }
 

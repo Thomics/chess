@@ -55,7 +55,9 @@ Pawn.prototype.createMoves = function(currentSquare) {
   //Code 8th Row
   //Program in the taking of the below piece, removing it from the board. En Passant
 
+
 };
+
 
 //@todo
 //Incomplete implementation Finish
@@ -69,6 +71,7 @@ function checkEnPassant(squareObj, currentSquare, offset, color) {
 
 }
 
+
 //If the space is occupied by an enemy piece we return that square.
 function checkPawnTake(currentSquare, offset, color) {
 
@@ -79,3 +82,14 @@ function checkPawnTake(currentSquare, offset, color) {
   }
   return false;
 }
+
+
+//function promotePawn(currentSquare, color) {
+//
+//  if ( color === 'white' && currentSquare <= 7 ) {
+//    console.log('0-7');
+//
+//  }
+//
+//
+//}
