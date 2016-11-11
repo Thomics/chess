@@ -131,8 +131,8 @@ function drop(ev) {
 
     targetSquare.innerHTML = '';
     //Adds the piece to the target square.
+    vm.movePiece(newSquare, previousSquare, pieceId, targetSquare);
     targetSquare.appendChild(document.getElementById(pieceId));
-    vm.movePiece(newSquare, previousSquare, pieceId);
     ev.dataTransfer.clearData();
 
   }
@@ -144,21 +144,24 @@ function drop(ev) {
 //newSquare - the id/class of the new square.
 //previousSquare - the previous squares number.
 //pieceID - the id of the piece that was moved.
-function movePiece(newSquare, previousSquare, pieceId) {
+function movePiece(newSquare, previousSquare, pieceId, targetSquare) {
 
   var pieceObj = vm.pieceList[pieceId];
+
+  if (newSquare <= 7 && pieceObj.piece === 'pawn') {
+    vm.pieceList[pieceId] = new Queen(pieceId, pieceObj.color, 'queen', 'q');
+    pieceObj = vm.pieceList[pieceId];
+    console.log(pieceObj);
+    //targetSquare.appendChild(document.getElementById(pieceId));
+    console.log(targetSquare);
+
+  }
 
   //Adds the square the piece moved from to the list of previous squares.
   pieceObj.previousSquares.push(newSquare);
   pieceObj.moved = true;
   pieceObj.currentSquare = newSquare;
 
-  if (newSquare <= 7 && pieceObj.piece === 'pawn') {
-    vm.pieceList[pieceId] = new Queen(newSquare, pieceObj.color, 'queen', 'q');
-    pieceObj = vm.pieceList[pieceId];
-    console.log('in');
-
-  }
 
   //Sets the new square to occupied, the old square to not occupied.
   vm.chessboard[newSquare].occupied = true;
@@ -168,8 +171,6 @@ function movePiece(newSquare, previousSquare, pieceId) {
   vm.chessboard[newSquare].piece = pieceObj;
   vm.chessboard[previousSquare].piece = {piece: '', color: '', pieceLetter: ''};
   vm.chessboard[previousSquare].occupied = false;
-
-
 
 
 }
