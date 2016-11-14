@@ -131,7 +131,7 @@ function drop(ev) {
 
     targetSquare.innerHTML = '';
     //Adds the piece to the target square.
-    vm.movePiece(newSquare, previousSquare, pieceId, targetSquare);
+    vm.movePiece(newSquare, previousSquare, pieceId);
     targetSquare.appendChild(document.getElementById(pieceId));
     ev.dataTransfer.clearData();
 
@@ -144,24 +144,18 @@ function drop(ev) {
 //newSquare - the id/class of the new square.
 //previousSquare - the previous squares number.
 //pieceID - the id of the piece that was moved.
-function movePiece(newSquare, previousSquare, pieceId, targetSquare) {
+function movePiece(newSquare, previousSquare, pieceId) {
 
   var pieceObj = vm.pieceList[pieceId];
 
-  if (newSquare <= 7 && pieceObj.piece === 'pawn') {
-    vm.pieceList[pieceId] = new Queen(pieceId, pieceObj.color, 'queen', 'q');
-    pieceObj = vm.pieceList[pieceId];
-    console.log(pieceObj);
-    //targetSquare.appendChild(document.getElementById(pieceId));
-    console.log(targetSquare);
-
+  if ( (newSquare <= 7 && pieceObj.piece === 'pawn') || (newSquare >= 56 && pieceObj.piece === 'pawn') ) {
+    pieceObj = pawnAdvancement(pieceId, pieceObj);
   }
 
   //Adds the square the piece moved from to the list of previous squares.
   pieceObj.previousSquares.push(newSquare);
   pieceObj.moved = true;
   pieceObj.currentSquare = newSquare;
-
 
   //Sets the new square to occupied, the old square to not occupied.
   vm.chessboard[newSquare].occupied = true;
@@ -172,10 +166,18 @@ function movePiece(newSquare, previousSquare, pieceId, targetSquare) {
   vm.chessboard[previousSquare].piece = {piece: '', color: '', pieceLetter: ''};
   vm.chessboard[previousSquare].occupied = false;
 
-
 }
 
 
 function generateHtml(chessSquare) {
   return '<div class="chess-space ' + chessSquare.squareNum + '" ondrop="drop(event)"  ondragover="allowDrop(event)"><p ondragstart="drag(event)" draggable="true" id="' + chessSquare.squareNum + '">' + chessSquare.piece.pieceLetter + '</p></div>\n'
 }
+
+//Program in the option for Rook, Knight, Bishop
+function pawnAdvancement(pieceId, pieceObj) {
+  pieceObj = new Queen(pieceId, pieceObj.color, 'queen', 'q');
+  vm.pieceList[pieceId] = pieceObj;
+  document.getElementById(pieceId).innerHTML = 'q';
+  return pieceObj;
+}
+
