@@ -1,0 +1,26 @@
+.App-header {
+	background-color: #282c34;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	color: white;
+}
+
+.gameboard {
+	width: 75vh;
+	height: 75vh;
+	margin: 12.5vh auto 0 auto;
+	background: #eeeed2;
+}
+
+.square {
+	width: calc(12.5% - 2px);
+	height: calc(12.5% - 2px);
+	background: #eeeed2;
+	float: left;
+	display: inline;
+	border: 1px solid black;
+}
