@@ -1,11 +1,12 @@
 import React from 'react';
 
-export default (props: {name: string; color: string; moveGamePiece: any}) => (
+const Piece = (props: {moveGamePiece: any; pieceData: any}) => (
 	<div
-		className={`chessPiece ${props.name} ${props.color}`}
-		onClick={() => {
-			console.log('bad?');
-			props.moveGamePiece();
+		className={`chessPiece ${props.pieceData.name} ${props.pieceData.color}`}
+		onClick={(event) => {
+			props.moveGamePiece(props.pieceData);
 		}}
 	/>
 );
+
+export default Piece;

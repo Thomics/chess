@@ -1,5 +1,7 @@
 import React from 'react';
 
-export default (props: {piece: any | null}) => (
+const Square = (props: {piece: any | null; row: string; column: string}) => (
 	<div className='square'>{props.piece}</div>
 );
+
+export default Square;

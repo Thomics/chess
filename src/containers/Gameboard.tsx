@@ -8,8 +8,8 @@ const Gameboard = () => {
 		new GameState().getDefaultGameData()
 	);
 
-	const moveGamePiece = (): any => {
-		updateGameData([[{color: 'white', name: 'rook'}]]);
+	const moveGamePiece = (pieceData: any): any => {
+		updateGameData(gameData);
 	};
 
 	const _createGameboard = (gameData: any): any =>
@@ -17,20 +17,22 @@ const Gameboard = () => {
 
 	const _fillRowSquares = (rowData: any): any =>
 		rowData.map((squareData: any) =>
-			squareData ? _setSquareWithPiece(squareData) : _setEmptySquare()
+			squareData
+				? _setSquareWithPiece(squareData)
+				: _setEmptySquare(squareData)
 		);
 
-	const _setEmptySquare = (): any => <Square piece={null} />;
+	const _setEmptySquare = (squareData: any): any => (
+		<Square piece={null} row={squareData.row} column={squareData.column} />
+	);
 
 	const _setSquareWithPiece = (squareData: any): any => (
 		<Square
 			piece={
-				<Piece
-					name={squareData.name}
-					color={squareData.color}
-					moveGamePiece={moveGamePiece}
-				/>
+				<Piece pieceData={squareData} moveGamePiece={moveGamePiece} />
 			}
+			row={squareData.row}
+			column={squareData.column}
 		/>
 	);
 

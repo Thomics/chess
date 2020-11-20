@@ -8,12 +8,4 @@ describe('Gameboard container', () => {
 
 		expect(instance.hasClass('gameboard')).toBeTruthy();
 	});
-
-	it('should add pawns to the gameboard', () => {
-		const wrapper = mount(<Gameboard />);
-		console.log(wrapper.find('.gameboard'));
-		console.log(wrapper.find('.gameboard').find('.chessboard').length);
-
-		expect(wrapper.find('.chessboard.pawn').length).toEqual(8);
-	});
 });
