@@ -1,15 +1,9 @@
 import React from 'react';
-import '../style/App.css';
+import '../style/index.scss';
 import Gameboard from '../containers/Gameboard';
 
-function App() {
-	return (
-		<div className='App'>
-			<header className='App-header'>
-				<Gameboard />
-			</header>
-		</div>
-	);
-}
+const App = () => {
+	return <Gameboard />;
+};
 
 export default App;

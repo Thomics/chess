@@ -1,0 +1,84 @@
+@font-face {
+	font-family: 'Chess Alpha';
+	src: url('./fonts/Alpha/Alpha.eot?') format('eot'),
+		url('./fonts/Alpha/Alpha.woff') format('woff'),
+		url('./fonts/Alpha/Alpha.ttf') format('truetype'),
+		url('./fonts/Alpha/Alpha.svg#') format('svg');
+}
+
+.gameboard {
+	width: 75vh;
+	height: 75vh;
+	margin: 12.5vh auto 0 auto;
+	background: #eeeed2;
+
+	.square {
+		&:nth-child(-2n + 8),
+		&:nth-child(8) ~ div:nth-child(-2n + 15),
+		&:nth-child(16) ~ div:nth-child(-2n + 24),
+		&:nth-child(24) ~ div:nth-child(-2n + 31),
+		&:nth-child(32) ~ div:nth-child(-2n + 40),
+		&:nth-child(40) ~ div:nth-child(-2n + 47),
+		&:nth-child(48) ~ div:nth-child(-2n + 56),
+		&:nth-child(56) ~ div:nth-child(-2n + 63) {
+			background-color: #769656;
+		}
+	}
+}
+
+.square {
+	width: 12.5%;
+	height: 12.5%;
+	background: #eeeed2;
+	float: left;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.chessPiece {
+	font-family: 'Chess Alpha';
+	font-size: 1.9em;
+	color: #000;
+
+	&.white {
+		&.pawn::after {
+			content: 'p';
+		}
+		&.rook::after {
+			content: 'r';
+		}
+		&.knight::after {
+			content: 'k';
+		}
+		&.bishop::after {
+			content: 'b';
+		}
+		&.queen::after {
+			content: 'q';
+		}
+		&.king::after {
+			content: 'k';
+		}
+	}
+	&.black {
+		&.pawn::after {
+			content: 'o';
+		}
+		&.rook::after {
+			content: 't';
+		}
+		&.knight::after {
+			content: 'j';
+		}
+		&.bishop::after {
+			content: 'n';
+		}
+		&.queen::after {
+			content: 'w';
+		}
+		&.king::after {
+			content: 'l';
+		}
+	}
+}
