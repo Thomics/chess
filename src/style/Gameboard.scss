@@ -40,6 +40,7 @@
 	font-family: 'Chess Alpha';
 	font-size: 1.9em;
 	color: #000;
+	transform: translate(0, 0);
 
 	&.white {
 		&.pawn::after {
