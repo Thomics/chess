@@ -22,8 +22,8 @@ const Piece = (props: {pieceData: PieceData}) => {
 };
 
 type PieceData = {
-	name: string;
-	color: string;
+	name: string | null;
+	color: string | null;
 	column: number;
 	row: number;
 };

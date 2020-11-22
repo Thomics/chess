@@ -1,8 +1,7 @@
 export default class GameState {
 	private BOARD_SIZE: number = 8;
 
-	// getDefaultGameData(): Array<object> {
-	getDefaultGameData(): any {
+	getDefaultGameData(): Array<Array<GameDataType>> {
 		const boardData = this._createEmptyBoardData();
 
 		this._fillPawns(boardData, 'white', 6);
@@ -13,20 +12,22 @@ export default class GameState {
 		return boardData;
 	}
 
-	_createEmptyBoardData(): Array<object> {
+	_createEmptyBoardData(): Array<Array<GameDataType>> {
 		return [...Array(this.BOARD_SIZE)].map((_, rowIndex) =>
 			Array.from(Array(this.BOARD_SIZE), (_, columnIndex) => ({
 				row: rowIndex,
 				column: columnIndex,
+				name: null,
+				color: null,
 			}))
 		);
 	}
 
 	_fillPawns(
-		board: Array<{[key: string]: any}>,
+		board: Array<Array<GameDataType>>,
 		color: string,
 		row: number
-	): Array<object> {
+	): Array<GameDataType> {
 		return board[row].map(
 			(_: any, index: number) =>
 				(board[row][index] = {
@@ -38,7 +39,7 @@ export default class GameState {
 	}
 
 	_fillBackrow(
-		board: Array<{[key: string]: any}>,
+		board: Array<Array<GameDataType>>,
 		color: string,
 		row: number
 	): Array<object> {
@@ -54,3 +55,10 @@ export default class GameState {
 		return board;
 	}
 }
+
+type GameDataType = {
+	name: string | null;
+	color: string | null;
+	row: number;
+	column: number;
+};

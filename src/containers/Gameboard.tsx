@@ -55,8 +55,8 @@ const Gameboard = () => {
 };
 
 type GameDataType = {
-	name: string;
-	color: string;
+	name: string | null;
+	color: string | null;
 	row: number;
 	column: number;
 };
