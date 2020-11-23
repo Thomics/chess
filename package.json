@@ -19,9 +19,8 @@
 		"web-vitals": "^0.2.4"
 	},
 	"devDependencies": {
-		"@types/enzyme": "^3.10.8",
-		"@wojtekmaj/enzyme-adapter-react-17": "^0.3.1",
-		"enzyme": "^3.11.0"
+		"@types/react-test-renderer": "^17.0.0",
+		"react-test-renderer": "^17.0.1"
 	},
 	"scripts": {
 		"start": "react-scripts start",

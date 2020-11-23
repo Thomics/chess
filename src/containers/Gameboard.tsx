@@ -35,6 +35,7 @@ const Gameboard = () => {
 			row={squareData.row}
 			column={squareData.column}
 			moveGamePiece={moveGamePiece}
+			key={`${squareData.row}${squareData.column}`}
 		/>
 	);
 
@@ -44,6 +45,7 @@ const Gameboard = () => {
 			row={squareData.row}
 			column={squareData.column}
 			moveGamePiece={moveGamePiece}
+			key={`${squareData.row}${squareData.column}`}
 		/>
 	);
 

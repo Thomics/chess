@@ -8,14 +8,14 @@ describe('Gameboard container', () => {
 			}> = gameState.getDefaultGameData();
 
 		expect(gameData[2]).toEqual([
-			{row: 2, column: 0},
-			{row: 2, column: 1},
-			{row: 2, column: 2},
-			{row: 2, column: 3},
-			{row: 2, column: 4},
-			{row: 2, column: 5},
-			{row: 2, column: 6},
-			{row: 2, column: 7},
+			{row: 2, column: 0, color: null, name: null},
+			{row: 2, column: 1, color: null, name: null},
+			{row: 2, column: 2, color: null, name: null},
+			{row: 2, column: 3, color: null, name: null},
+			{row: 2, column: 4, color: null, name: null},
+			{row: 2, column: 5, color: null, name: null},
+			{row: 2, column: 6, color: null, name: null},
+			{row: 2, column: 7, color: null, name: null},
 		]);
 	});
 

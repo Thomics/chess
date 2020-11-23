@@ -2,7 +2,7 @@ import React from 'react';
 import {useDrop} from 'react-dnd';
 
 const Square = (props: Props) => {
-	const [{}, drop] = useDrop({
+	const drop = useDrop({
 		accept: 'piece',
 		drop: (context: {
 			piece: {
@@ -13,8 +13,6 @@ const Square = (props: Props) => {
 			};
 			type: 'piece';
 		}) => {
-			console.log(context);
-			console.log(context.piece);
 			props.moveGamePiece(
 				props.row,
 				props.column,
@@ -25,7 +23,7 @@ const Square = (props: Props) => {
 	});
 
 	return (
-		<div ref={drop} className='square'>
+		<div ref={drop[1]} className='square'>
 			{props.piece}
 		</div>
 	);
