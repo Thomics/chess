@@ -1,4 +1,4 @@
-import GameState from './GameState';
+import GameState from './DefaultGameState';
 
 describe('Gameboard container', () => {
 	it('should generate a default game setup', () => {

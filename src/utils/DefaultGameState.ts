@@ -1,4 +1,4 @@
-export default class GameState {
+export default class DefaultGameState {
 	private BOARD_SIZE: number = 8;
 
 	getDefaultGameData(): Array<Array<GameDataType>> {

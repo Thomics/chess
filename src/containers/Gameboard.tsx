@@ -4,7 +4,7 @@ import {HTML5Backend} from 'react-dnd-html5-backend';
 // import { TouchBackend } from 'react-dnd-touch-backend' // figure out the mobile part of backend
 import Square from '../components/Square';
 import Piece from '../components/Piece';
-import GameState from '../utils/GameState';
+import GameState from '../utils/DefaultGameState';
 
 const Gameboard = () => {
 	const [gameData, updateGameData] = useState(
