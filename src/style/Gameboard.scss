@@ -42,44 +42,41 @@
 	color: #000;
 	transform: translate(0, 0);
 
-	&.white {
-		&.pawn::after {
-			content: 'p';
-		}
-		&.rook::after {
-			content: 'r';
-		}
-		&.knight::after {
-			content: 'h';
-		}
-		&.bishop::after {
-			content: 'b';
-		}
-		&.queen::after {
-			content: 'q';
-		}
-		&.king::after {
-			content: 'k';
-		}
+	&.whitePawn::after {
+		content: 'p';
 	}
-	&.black {
-		&.pawn::after {
-			content: 'o';
-		}
-		&.rook::after {
-			content: 't';
-		}
-		&.knight::after {
-			content: 'j';
-		}
-		&.bishop::after {
-			content: 'n';
-		}
-		&.queen::after {
-			content: 'w';
-		}
-		&.king::after {
-			content: 'l';
-		}
+	&.whiteRook::after {
+		content: 'r';
+	}
+	&.whiteKnight::after {
+		content: 'h';
+	}
+	&.whiteBishop::after {
+		content: 'b';
+	}
+	&.whiteQueen::after {
+		content: 'q';
+	}
+	&.whiteKing::after {
+		content: 'k';
+	}
+
+	&.blackPawn::after {
+		content: 'o';
+	}
+	&.blackRook::after {
+		content: 't';
+	}
+	&.blackKnight::after {
+		content: 'j';
+	}
+	&.blackBishop::after {
+		content: 'n';
+	}
+	&.blackQueen::after {
+		content: 'w';
+	}
+	&.blackKing::after {
+		content: 'l';
 	}
 }

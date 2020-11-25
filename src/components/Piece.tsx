@@ -16,14 +16,13 @@ const Piece = (props: Props) => {
 				opacity: isDragging ? 0.25 : 1,
 				cursor: 'move',
 			}}
-			className={`chessPiece ${props.piece} ${props.color}`}
+			className={`chessPiece ${props.piece}`}
 		/>
 	);
 };
 
 type Props = {
 	piece: string | null;
-	color: string | null;
 	column: number;
 	row: number;
 };

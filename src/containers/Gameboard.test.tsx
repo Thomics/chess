@@ -20,15 +20,15 @@ describe('Gameboard container', () => {
 		const instance = TestRenderer.create(<Gameboard />).toJSON() as any;
 
 		expect(instance.children[0].children[0].props.className).toEqual(
-			'chessPiece rook black'
+			'chessPiece blackRook'
 		);
 
 		expect(instance.children[57].children[0].props.className).toEqual(
-			'chessPiece knight white'
+			'chessPiece whiteKnight'
 		);
 
 		expect(instance.children[49].children[0].props.className).toEqual(
-			'chessPiece pawn white'
+			'chessPiece whitePawn'
 		);
 	});
 });

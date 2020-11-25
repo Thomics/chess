@@ -5,23 +5,23 @@ import {DndProvider} from 'react-dnd';
 import Piece from './Piece';
 
 describe('Piece component', () => {
-	test('should render a white pawn piece', () => {
+	it('should render a white pawn piece', () => {
 		const instance = TestRenderer.create(
 			<DndProvider backend={HTML5Backend}>
-				<Piece piece={'pawn'} color={'white'} column={0} row={6} />
+				<Piece piece={'whitePawn'} column={0} row={6} />
 			</DndProvider>
 		).toJSON() as any;
 
-		expect(instance.props.className).toEqual('chessPiece pawn white');
+		expect(instance.props.className).toEqual('chessPiece whitePawn');
 	});
 
-	test('should render a black king piece', () => {
+	it('should render a black king piece', () => {
 		const instance = TestRenderer.create(
 			<DndProvider backend={HTML5Backend}>
-				<Piece piece={'king'} color={'black'} column={4} row={0} />
+				<Piece piece={'blackKing'} column={4} row={0} />
 			</DndProvider>
 		).toJSON() as any;
 
-		expect(instance.props.className).toEqual('chessPiece king black');
+		expect(instance.props.className).toEqual('chessPiece blackKing');
 	});
 });

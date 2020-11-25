@@ -22,10 +22,8 @@ const Gameboard = () => {
 				tempGameData[originRow][originColumn];
 
 		tempGameData[destRow][destColumn].piece = originPieceData.piece;
-		tempGameData[destRow][destColumn].color = originPieceData.color;
 		tempGameData[originRow][originColumn].piece = null;
-		tempGameData[originRow][originColumn].color = null;
-
+		console.log(tempGameData);
 		updateGameData(tempGameData);
 	};
 
@@ -58,7 +56,6 @@ const Gameboard = () => {
 			piece={
 				<Piece
 					piece={squareData.piece}
-					color={squareData.color}
 					column={squareData.column}
 					row={squareData.row}
 				/>
@@ -79,7 +76,6 @@ const Gameboard = () => {
 
 type GameDataType = {
 	piece: string | null;
-	color: string | null;
 	row: number;
 	column: number;
 };

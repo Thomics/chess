@@ -8,14 +8,14 @@ describe('Gameboard container', () => {
 			}> = gameState.getDefaultGameData();
 
 		expect(gameData[2]).toEqual([
-			{row: 2, column: 0, color: null, piece: null},
-			{row: 2, column: 1, color: null, piece: null},
-			{row: 2, column: 2, color: null, piece: null},
-			{row: 2, column: 3, color: null, piece: null},
-			{row: 2, column: 4, color: null, piece: null},
-			{row: 2, column: 5, color: null, piece: null},
-			{row: 2, column: 6, color: null, piece: null},
-			{row: 2, column: 7, color: null, piece: null},
+			{row: 2, column: 0, piece: null},
+			{row: 2, column: 1, piece: null},
+			{row: 2, column: 2, piece: null},
+			{row: 2, column: 3, piece: null},
+			{row: 2, column: 4, piece: null},
+			{row: 2, column: 5, piece: null},
+			{row: 2, column: 6, piece: null},
+			{row: 2, column: 7, piece: null},
 		]);
 	});
 
@@ -26,20 +26,19 @@ describe('Gameboard container', () => {
 			}> = gameState.getDefaultGameData();
 
 		expect(gameData[6]).toEqual([
-			{row: 6, column: 0, piece: 'pawn', color: 'white'},
-			{row: 6, column: 1, piece: 'pawn', color: 'white'},
-			{row: 6, column: 2, piece: 'pawn', color: 'white'},
-			{row: 6, column: 3, piece: 'pawn', color: 'white'},
-			{row: 6, column: 4, piece: 'pawn', color: 'white'},
-			{row: 6, column: 5, piece: 'pawn', color: 'white'},
-			{row: 6, column: 6, piece: 'pawn', color: 'white'},
-			{row: 6, column: 7, piece: 'pawn', color: 'white'},
+			{row: 6, column: 0, piece: 'whitePawn'},
+			{row: 6, column: 1, piece: 'whitePawn'},
+			{row: 6, column: 2, piece: 'whitePawn'},
+			{row: 6, column: 3, piece: 'whitePawn'},
+			{row: 6, column: 4, piece: 'whitePawn'},
+			{row: 6, column: 5, piece: 'whitePawn'},
+			{row: 6, column: 6, piece: 'whitePawn'},
+			{row: 6, column: 7, piece: 'whitePawn'},
 		]);
 		expect(gameData[1][0]).toEqual({
 			row: 1,
 			column: 0,
-			piece: 'pawn',
-			color: 'black',
+			piece: 'blackPawn',
 		});
 	});
 
@@ -50,25 +49,25 @@ describe('Gameboard container', () => {
 			}> = gameState.getDefaultGameData();
 
 		expect(gameData[7]).toEqual([
-			{row: 7, column: 0, piece: 'rook', color: 'white'},
-			{row: 7, column: 1, piece: 'knight', color: 'white'},
-			{row: 7, column: 2, piece: 'bishop', color: 'white'},
-			{row: 7, column: 3, piece: 'queen', color: 'white'},
-			{row: 7, column: 4, piece: 'king', color: 'white'},
-			{row: 7, column: 5, piece: 'bishop', color: 'white'},
-			{row: 7, column: 6, piece: 'knight', color: 'white'},
-			{row: 7, column: 7, piece: 'rook', color: 'white'},
+			{row: 7, column: 0, piece: 'whiteRook'},
+			{row: 7, column: 1, piece: 'whiteKnight'},
+			{row: 7, column: 2, piece: 'whiteBishop'},
+			{row: 7, column: 3, piece: 'whiteQueen'},
+			{row: 7, column: 4, piece: 'whiteKing'},
+			{row: 7, column: 5, piece: 'whiteBishop'},
+			{row: 7, column: 6, piece: 'whiteKnight'},
+			{row: 7, column: 7, piece: 'whiteRook'},
 		]);
 
 		expect(gameData[0]).toEqual([
-			{row: 0, column: 0, piece: 'rook', color: 'black'},
-			{row: 0, column: 1, piece: 'knight', color: 'black'},
-			{row: 0, column: 2, piece: 'bishop', color: 'black'},
-			{row: 0, column: 3, piece: 'queen', color: 'black'},
-			{row: 0, column: 4, piece: 'king', color: 'black'},
-			{row: 0, column: 5, piece: 'bishop', color: 'black'},
-			{row: 0, column: 6, piece: 'knight', color: 'black'},
-			{row: 0, column: 7, piece: 'rook', color: 'black'},
+			{row: 0, column: 0, piece: 'blackRook'},
+			{row: 0, column: 1, piece: 'blackKnight'},
+			{row: 0, column: 2, piece: 'blackBishop'},
+			{row: 0, column: 3, piece: 'blackQueen'},
+			{row: 0, column: 4, piece: 'blackKing'},
+			{row: 0, column: 5, piece: 'blackBishop'},
+			{row: 0, column: 6, piece: 'blackKnight'},
+			{row: 0, column: 7, piece: 'blackRook'},
 		]);
 	});
 });

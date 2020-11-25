@@ -18,7 +18,6 @@ export default class DefaultGameState {
 				row: rowIndex,
 				column: columnIndex,
 				piece: null,
-				color: null,
 			}))
 		);
 	}
@@ -32,8 +31,7 @@ export default class DefaultGameState {
 			(_: any, index: number) =>
 				(board[row][index] = {
 					...board[row][index],
-					piece: 'pawn',
-					color: color,
+					piece: `${color}Pawn`,
 				})
 		);
 	}
@@ -43,46 +41,14 @@ export default class DefaultGameState {
 		color: string,
 		row: number
 	): Array<object> {
-		board[row][0] = {
-			...board[row][0],
-			piece: 'rook',
-			color: color,
-		};
-		board[row][1] = {
-			...board[row][1],
-			piece: 'knight',
-			color: color,
-		};
-		board[row][2] = {
-			...board[row][2],
-			piece: 'bishop',
-			color: color,
-		};
-		board[row][3] = {
-			...board[row][3],
-			piece: 'queen',
-			color: color,
-		};
-		board[row][4] = {
-			...board[row][4],
-			piece: 'king',
-			color: color,
-		};
-		board[row][5] = {
-			...board[row][5],
-			piece: 'bishop',
-			color: color,
-		};
-		board[row][6] = {
-			...board[row][6],
-			piece: 'knight',
-			color: color,
-		};
-		board[row][7] = {
-			...board[row][7],
-			piece: 'rook',
-			color: color,
-		};
+		board[row][0] = {...board[row][0], piece: `${color}Rook`};
+		board[row][1] = {...board[row][1], piece: `${color}Knight`};
+		board[row][2] = {...board[row][2], piece: `${color}Bishop`};
+		board[row][3] = {...board[row][3], piece: `${color}Queen`};
+		board[row][4] = {...board[row][4], piece: `${color}King`};
+		board[row][5] = {...board[row][5], piece: `${color}Bishop`};
+		board[row][6] = {...board[row][6], piece: `${color}Knight`};
+		board[row][7] = {...board[row][7], piece: `${color}Rook`};
 
 		return board;
 	}
@@ -90,7 +56,6 @@ export default class DefaultGameState {
 
 type GameDataType = {
 	piece: string | null;
-	color: string | null;
 	row: number;
 	column: number;
 };
