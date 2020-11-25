@@ -5,18 +5,18 @@ export default class GameMoveManager {
 		this.gameState = gameState;
 	}
 
-	movePiece(
-		originRow: number,
-		originColumn: number,
-		destinationRow: number,
-		destinationColumn: number
-	) {
-		this.gameState[destinationRow][destinationColumn] = this.gameState[
-			originRow
-		][originColumn];
-		this.gameState[originRow][originColumn].name = null;
-		this.gameState[originRow][originColumn].color = null;
-	}
+	// movePiece(
+	// 	originRow: number,
+	// 	originColumn: number,
+	// 	destinationRow: number,
+	// 	destinationColumn: number
+	// ) {
+	// 	this.gameState[destinationRow][destinationColumn] = this.gameState[
+	// 		originRow
+	// 	][originColumn];
+
+	// 	this.gameState[originRow][originColumn] = null;
+	// }
 }
 
 type GameDataType = {

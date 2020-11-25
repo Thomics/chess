@@ -1,9 +1,9 @@
 import React from 'react';
 import {useDrag} from 'react-dnd';
 
-const Piece = (props: {pieceData: PieceData}) => {
+const Piece = (props: Props) => {
 	const [{isDragging}, drag] = useDrag({
-		item: {type: 'piece', piece: props.pieceData},
+		item: {type: 'piece', ...props},
 		collect: (monitor) => ({
 			isDragging: !!monitor.isDragging(),
 		}),
@@ -16,13 +16,13 @@ const Piece = (props: {pieceData: PieceData}) => {
 				opacity: isDragging ? 0.25 : 1,
 				cursor: 'move',
 			}}
-			className={`chessPiece ${props.pieceData.name} ${props.pieceData.color}`}
+			className={`chessPiece ${props.piece} ${props.color}`}
 		/>
 	);
 };
 
-type PieceData = {
-	name: string | null;
+type Props = {
+	piece: string | null;
 	color: string | null;
 	column: number;
 	row: number;

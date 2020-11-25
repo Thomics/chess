@@ -8,14 +8,7 @@ describe('Piece component', () => {
 	test('should render a white pawn piece', () => {
 		const instance = TestRenderer.create(
 			<DndProvider backend={HTML5Backend}>
-				<Piece
-					pieceData={{
-						name: 'pawn',
-						color: 'white',
-						column: 0,
-						row: 6,
-					}}
-				/>
+				<Piece piece={'pawn'} color={'white'} column={0} row={6} />
 			</DndProvider>
 		).toJSON() as any;
 
@@ -25,14 +18,7 @@ describe('Piece component', () => {
 	test('should render a black king piece', () => {
 		const instance = TestRenderer.create(
 			<DndProvider backend={HTML5Backend}>
-				<Piece
-					pieceData={{
-						name: 'king',
-						color: 'black',
-						column: 4,
-						row: 0,
-					}}
-				/>
+				<Piece piece={'king'} color={'black'} column={4} row={0} />
 			</DndProvider>
 		).toJSON() as any;
 

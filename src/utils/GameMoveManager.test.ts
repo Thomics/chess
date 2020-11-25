@@ -2,14 +2,14 @@ import GameMoveManager from './GameMoveManager';
 import GameState from './DefaultGameState';
 
 describe('GameMoverManager class', () => {
-	it('should be constructed with a gameboard array', () => {
+	xit('should be constructed with a gameboard array', () => {
 		const gameState = getBaseGameState(),
 			moveManager = new GameMoveManager(gameState);
 
 		expect(moveManager.gameState).toEqual(gameState);
 	});
 
-	it('should update pawn piece location from row 6 to row 4', () => {
+	xit('should update pawn piece location from row 6 to row 4', () => {
 		const gameState = getBaseGameState(),
 			moveManager = new GameMoveManager(gameState);
 

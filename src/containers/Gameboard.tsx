@@ -11,8 +11,22 @@ const Gameboard = () => {
 		new GameState().getDefaultGameData()
 	);
 
-	const moveGamePiece = (row: string, column: string, piece: any): any => {
-		updateGameData(gameData);
+	const moveGamePiece = (
+		originRow: number,
+		originColumn: number,
+		destRow: number,
+		destColumn: number
+	): any => {
+		let tempGameData: Array<Array<GameDataType>> = [...gameData],
+			originPieceData: GameDataType =
+				tempGameData[originRow][originColumn];
+
+		tempGameData[destRow][destColumn].piece = originPieceData.piece;
+		tempGameData[destRow][destColumn].color = originPieceData.color;
+		tempGameData[originRow][originColumn].piece = null;
+		tempGameData[originRow][originColumn].color = null;
+
+		updateGameData(tempGameData);
 	};
 
 	const _createGameboard = (
@@ -41,7 +55,14 @@ const Gameboard = () => {
 
 	const _setSquareWithPiece = (squareData: GameDataType): JSX.Element => (
 		<Square
-			piece={<Piece pieceData={squareData} />}
+			piece={
+				<Piece
+					piece={squareData.piece}
+					color={squareData.color}
+					column={squareData.column}
+					row={squareData.row}
+				/>
+			}
 			row={squareData.row}
 			column={squareData.column}
 			moveGamePiece={moveGamePiece}
@@ -57,7 +78,7 @@ const Gameboard = () => {
 };
 
 type GameDataType = {
-	name: string | null;
+	piece: string | null;
 	color: string | null;
 	row: number;
 	column: number;

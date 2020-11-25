@@ -4,20 +4,12 @@ import {useDrop} from 'react-dnd';
 const Square = (props: Props) => {
 	const drop = useDrop({
 		accept: 'piece',
-		drop: (context: {
-			piece: {
-				color: string;
-				column: number;
-				name: string;
-				row: number;
-			};
-			type: 'piece';
-		}) => {
+		drop: (origin: OriginData) => {
 			props.moveGamePiece(
+				origin.row,
+				origin.column,
 				props.row,
-				props.column,
-				context.piece.row,
-				context.piece.column
+				props.column
 			);
 		},
 	});
@@ -34,6 +26,14 @@ type Props = {
 	column: number;
 	row: number;
 	moveGamePiece: Function;
+};
+
+type OriginData = {
+	color: string;
+	column: number;
+	name: string;
+	row: number;
+	type: 'piece';
 };
 
 export default Square;
